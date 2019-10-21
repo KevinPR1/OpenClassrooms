@@ -1,12 +1,14 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,6 @@ import android.widget.Toast;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
-import com.openclassrooms.entrevoisins.model.DetailActivity;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.ItemClickSupport;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -27,41 +28,43 @@ import java.util.List;
 
 import butterknife.BindView;
 
-
-public class NeighbourFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class FavoritesFragment extends Fragment {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private MyNeighbourRecyclerViewAdapter mRecyclerAdapter ;
-    @BindView(R.id.Favorites_RecyclerView)
-    RecyclerView mnRecyclerView;
+
+   @BindView(R.id.Favorites_RecyclerView)
+   RecyclerView mRecyclerView;
 
 
-    /**
-     * Create and return a new instance
-     * @return @{@link NeighbourFragment}
-     */
-    public static NeighbourFragment newInstance() {
-        NeighbourFragment fragment = new NeighbourFragment();
-        return fragment;
+
+
+    public static FavoritesFragment newInstance () {
+        // Required empty public constructor
+        return  (new FavoritesFragment());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mApiService = DI.getNeighbourApiService();
+       mApiService = DI.getNeighbourApiService();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_neighbour_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         Context context = view.getContext();
-        mnRecyclerView = (RecyclerView) view;
-        mnRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mnRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        configureOnClickRecyclerView() ;
+        mRecyclerView = (RecyclerView) view;
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         initList();
+        this.configureOnClickRecyclerView();
         return view;
     }
 
@@ -70,27 +73,26 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
+
         mNeighbours = mApiService.getNeighbours();
-        mnRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+       mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
     }
 
 
 
     // 1 - Configure item click on RecyclerView
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(mnRecyclerView, R.layout.fragment_neighbour)
+        ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_neighbour)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
+                        // 1 - Get user from adapter
                         Toast.makeText(getContext(), "Chargement...", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent (getActivity(),DetailActivity.class) ;
-                        startActivity(intent);
-
+                        
                     }
                 });
     }
+
 
 
 
@@ -115,4 +117,7 @@ public class NeighbourFragment extends Fragment {
         mApiService.deleteNeighbour(event.neighbour);
         initList();
     }
+
+
+
 }

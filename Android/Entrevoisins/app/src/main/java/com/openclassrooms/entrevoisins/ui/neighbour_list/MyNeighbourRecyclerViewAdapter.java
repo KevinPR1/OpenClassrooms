@@ -58,6 +58,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         return mNeighbours.size();
     }
 
+    public Neighbour getNeighbour (int position) {
+
+        return this.mNeighbours.get(position);
+    }
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
