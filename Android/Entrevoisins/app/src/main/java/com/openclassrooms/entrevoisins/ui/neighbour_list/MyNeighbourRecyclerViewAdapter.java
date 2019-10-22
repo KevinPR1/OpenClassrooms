@@ -60,7 +60,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     public Neighbour getNeighbour (int position) {
 
-        return this.mNeighbours.get(position);
+        return mNeighbours.get(position);
     }
 
 

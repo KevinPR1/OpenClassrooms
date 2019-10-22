@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
-import com.openclassrooms.entrevoisins.model.DetailActivity;
+import com.openclassrooms.entrevoisins.ui.favorites_list.DetailActivity;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.ItemClickSupport;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -35,7 +36,7 @@ public class NeighbourFragment extends Fragment {
     private MyNeighbourRecyclerViewAdapter mRecyclerAdapter ;
     @BindView(R.id.Favorites_RecyclerView)
     RecyclerView mnRecyclerView;
-
+    private static final String TAG = "NeighbourFragment";
 
     /**
      * Create and return a new instance
@@ -71,6 +72,7 @@ public class NeighbourFragment extends Fragment {
      */
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
+        mRecyclerAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours);
         mnRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
     }
 
@@ -82,12 +84,11 @@ public class NeighbourFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
-                        Toast.makeText(getContext(), "Chargement...", Toast.LENGTH_SHORT).show();
-
+                        Log.d(TAG, "onItemClicked: ");
+                        Neighbour neighbour =  mRecyclerAdapter.getNeighbour(position);
+                        Toast.makeText(getContext(), "Chargement..."+ neighbour.getName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (getActivity(),DetailActivity.class) ;
                         startActivity(intent);
-
                     }
                 });
     }

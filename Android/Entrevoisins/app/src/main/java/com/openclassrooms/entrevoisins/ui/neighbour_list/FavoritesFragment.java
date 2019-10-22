@@ -2,9 +2,9 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
+import com.openclassrooms.entrevoisins.ui.favorites_list.DetailActivity;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.ItemClickSupport;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -36,7 +37,7 @@ public class FavoritesFragment extends Fragment {
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private MyNeighbourRecyclerViewAdapter mRecyclerAdapter ;
-
+    private static final String TAG = "FavoritesFragment";
    @BindView(R.id.Favorites_RecyclerView)
    RecyclerView mRecyclerView;
 
@@ -64,7 +65,7 @@ public class FavoritesFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         initList();
-        this.configureOnClickRecyclerView();
+        configureOnClickRecyclerView();
         return view;
     }
 
@@ -75,24 +76,30 @@ public class FavoritesFragment extends Fragment {
     private void initList() {
 
         mNeighbours = mApiService.getNeighbours();
-       mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        mRecyclerAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours);
+       mRecyclerView.setAdapter(mRecyclerAdapter);
     }
 
 
 
     // 1 - Configure item click on RecyclerView
     private void configureOnClickRecyclerView(){
+       
         ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_neighbour)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // 1 - Get user from adapter
-                        Toast.makeText(getContext(), "Chargement...", Toast.LENGTH_SHORT).show();
-                        
+                        Log.d(TAG, "onItemClicked: ");
+                        Neighbour neighbour =  mRecyclerAdapter.getNeighbour(position);
+                        Log.d(TAG, "onItemClicked: Neighbour is "+ neighbour.getName());
+                        Toast.makeText(getContext(), "Chargement..." + neighbour.getName(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent (getActivity(), DetailActivity.class) ;
+                        startActivity(intent);
                     }
                 });
     }
-
 
 
 
