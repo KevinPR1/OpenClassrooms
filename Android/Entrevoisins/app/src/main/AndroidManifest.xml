@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.favorites_list.DetailActivity"
+            android:theme="@style/AppTheme.No"
             android:label="Détails">
         </activity>
         <activity

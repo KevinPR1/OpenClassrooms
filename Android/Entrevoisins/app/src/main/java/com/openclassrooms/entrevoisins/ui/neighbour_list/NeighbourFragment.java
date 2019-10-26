@@ -88,6 +88,7 @@ public class NeighbourFragment extends Fragment {
                         Neighbour neighbour =  mRecyclerAdapter.getNeighbour(position);
                         Toast.makeText(getContext(), "Chargement..."+ neighbour.getName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (getActivity(),DetailActivity.class) ;
+                        intent.putExtra(neighbour.getName(),position);
                         startActivity(intent);
                     }
                 });

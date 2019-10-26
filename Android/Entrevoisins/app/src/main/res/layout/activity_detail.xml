@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout_detail_activity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-android:background="@color/colorPrimary"
-    tools:background="@color/colorPrimary">
-
-
-
-<ImageView
-    android:id="@+id/ac_ImageView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_action_back"
-    android:padding="20dp">
-
-</ImageView>
-
-
-
-
-</FrameLayout>
+    android:layout_height="match_parent"/>

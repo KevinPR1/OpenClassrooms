@@ -91,11 +91,14 @@ public class FavoritesFragment extends Fragment {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // 1 - Get user from adapter
                         Log.d(TAG, "onItemClicked: ");
+
                         Neighbour neighbour =  mRecyclerAdapter.getNeighbour(position);
+
                         Log.d(TAG, "onItemClicked: Neighbour is "+ neighbour.getName());
                         Toast.makeText(getContext(), "Chargement..." + neighbour.getName(), Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent (getActivity(), DetailActivity.class) ;
+                        intent.putExtra(neighbour.getName(),position);
                         startActivity(intent);
                     }
                 });
