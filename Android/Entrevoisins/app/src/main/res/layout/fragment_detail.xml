@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-
-
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/coordinator"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#DCDCDC"
-    tools:context=".ui.favorites_list.DetailFragment">
+    tools:context=".ui.favorites_list.DetailFragment"
+    android:background="#EFEFEF">
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -41,7 +42,7 @@
 
 
         <TextView
-            android:id="@+id/constraintLayout_TextView"
+            android:id="@+id/title_TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Caroline"
@@ -53,14 +54,14 @@
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
-
-
-
     </android.support.constraint.ConstraintLayout>
 
 
 
+
+
     <android.support.v7.widget.CardView
+        android:id="@+id/card_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -73,12 +74,73 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <TextView
+            android:id="@+id/card_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="20sp"
+            android:text="Caroline "
+            android:textColor="@android:color/black"
             />
 
+        <View
+            android:id="@+id/ligne1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#EFEFEF"
+            android:backgroundTint="#EFEFEF"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/card_title"
+            />
+
+
+        <TextView
+            android:id="@+id/card1_textview1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:drawableLeft="@drawable/ic_place"
+            android:text="   Saint pierre du mont à 5km"
+            android:textSize="13sp"
+            android:layout_below="@+id/ligne1"
+            android:gravity="bottom"
+            />
+
+        <TextView
+            android:id="@+id/card1_textview2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:textSize="13sp"
+            android:drawableLeft="@drawable/ic_phone"
+            android:text="   +33 6 86 57 90 14"
+            android:layout_below="@id/card1_textview1"
+            android:gravity="bottom"
+            />
+
+        <TextView
+            android:id="@+id/card1_textview3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:textSize="13sp"
+            android:drawableLeft="@drawable/ic_social"
+            android:text="   www.facebook.fr"
+            android:layout_below="@id/card1_textview2"
+            android:gravity="bottom"
+            />
 
 
     </RelativeLayout>
@@ -88,8 +150,80 @@
     </android.support.v7.widget.CardView>
 
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:textSize="20sp"
+                    android:text="A propos de moi"
+                    android:textColor="@android:color/black"/>
+
+                <View
+                    android:id="@+id/ligne2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#EFEFEF"
+                    android:backgroundTint="#EFEFEF"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:layout_below="@+id/description"
+                    />
+
+                <TextView
+                    android:id="@+id/description_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:paddingBottom="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:textSize="12sp"
+                    android:layout_below="@id/ligne2"
+                    />
 
 
 
+            </RelativeLayout>
 
-</LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+
+    </LinearLayout>
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_star_border_white_24dp"
+        app:backgroundTint="#EFEFEF"
+        app:tint="#9E9E9E"
+        app:layout_anchor="@id/ac_avatar"
+        app:layout_anchorGravity="bottom|right|end"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
