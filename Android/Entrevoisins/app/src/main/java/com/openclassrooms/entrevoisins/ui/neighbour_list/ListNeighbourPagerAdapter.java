@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
-
 
 
 
@@ -36,6 +36,8 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
         }
 
     }
+
+
 
 
 

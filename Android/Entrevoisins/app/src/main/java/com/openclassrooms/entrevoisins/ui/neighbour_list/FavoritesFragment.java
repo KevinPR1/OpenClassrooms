@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
-import com.openclassrooms.entrevoisins.ui.favorites_list.DetailActivity;
+import com.openclassrooms.entrevoisins.ui.Detail.DetailActivity;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.ItemClickSupport;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -25,6 +25,7 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,12 +36,15 @@ import butterknife.BindView;
 public class FavoritesFragment extends Fragment {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
-    private MyNeighbourRecyclerViewAdapter mRecyclerAdapter ;
+
+    private List<Neighbour> favoritesNeighbour ;
+
+    private FavoritesRecyclerAdapter mFavoritesRecyclerAdapter ;
+
     private static final String TAG = "FavoritesFragment";
+
    @BindView(R.id.Favorites_RecyclerView)
    RecyclerView mRecyclerView;
-
 
 
 
@@ -75,14 +79,14 @@ public class FavoritesFragment extends Fragment {
      */
     private void initList() {
 
-        mNeighbours = mApiService.getNeighbours();
-        mRecyclerAdapter = new MyNeighbourRecyclerViewAdapter(mNeighbours);
-       mRecyclerView.setAdapter(mRecyclerAdapter);
+        favoritesNeighbour = mApiService.getFavNeighbours();
+        mFavoritesRecyclerAdapter = new FavoritesRecyclerAdapter(favoritesNeighbour);
+       mRecyclerView.setAdapter(mFavoritesRecyclerAdapter);
     }
 
 
 
-    // 1 - Configure item click on RecyclerView
+    //  Configure item click on RecyclerView
     private void configureOnClickRecyclerView(){
        
         ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_neighbour)
@@ -91,14 +95,14 @@ public class FavoritesFragment extends Fragment {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // 1 - Get user from adapter
                         Log.d(TAG, "onItemClicked: ");
-
-                        Neighbour neighbour =  mRecyclerAdapter.getNeighbour(position);
+                        Neighbour neighbour =  mFavoritesRecyclerAdapter.getNeighbour(position);
 
                         Log.d(TAG, "onItemClicked: Neighbour is "+ neighbour.getName());
-                        Toast.makeText(getContext(), "Chargement..." + neighbour.getName(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Loading..." + neighbour.getName(), Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent (getActivity(), DetailActivity.class) ;
-                        intent.putExtra(neighbour.getName(),position);
+                        intent.putExtra("KEYNEIGHBOUR",neighbour) ;
+
                         startActivity(intent);
                     }
                 });
@@ -124,7 +128,7 @@ public class FavoritesFragment extends Fragment {
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        mApiService.deleteNeighbour(event.neighbour);
+        mApiService.deleteFavNeighbour(event.neighbour);
         initList();
     }
 

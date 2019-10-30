@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/coordinator"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.favorites_list.DetailFragment"
+    tools:context=".ui.Detail.DetailFragment"
     android:background="#EFEFEF">
 
     <LinearLayout
@@ -35,9 +35,10 @@
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:src="@drawable/ic_action_back"
-            android:tint="#CECECE"
+            android:tint="#F5F5F5"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+
             />
 
 
@@ -79,7 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:paddingTop="10dp"
+            android:layout_marginStart="3dp"
+            android:paddingTop="15dp"
             android:paddingBottom="10dp"
             android:textSize="20sp"
             android:text="Caroline "
@@ -106,7 +108,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:paddingStart="10dp"
-            android:paddingTop="10dp"
+            android:paddingTop="13dp"
             android:drawableLeft="@drawable/ic_place"
             android:text="   Saint pierre du mont à 5km"
             android:textSize="13sp"
@@ -120,7 +122,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:paddingStart="10dp"
-            android:paddingTop="10dp"
+            android:paddingTop="13dp"
             android:textSize="13sp"
             android:drawableLeft="@drawable/ic_phone"
             android:text="   +33 6 86 57 90 14"
@@ -134,10 +136,10 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:paddingStart="10dp"
-            android:paddingTop="10dp"
+            android:paddingTop="13dp"
             android:textSize="13sp"
             android:drawableLeft="@drawable/ic_social"
-            android:text="   www.facebook.fr"
+            android:text="     www.facebook.fr"
             android:layout_below="@id/card1_textview2"
             android:gravity="bottom"
             />
@@ -191,7 +193,7 @@
                 <TextView
                     android:id="@+id/description_textview"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="110dp"
                     android:paddingBottom="20dp"
                     android:paddingStart="10dp"
                     android:paddingTop="10dp"
@@ -214,14 +216,16 @@
 
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
+        android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_star_border_white_24dp"
+
         app:backgroundTint="#EFEFEF"
-        app:tint="#9E9E9E"
+        android:tint="#9E9E9E"
         app:layout_anchor="@id/ac_avatar"
         app:layout_anchorGravity="bottom|right|end"
         />

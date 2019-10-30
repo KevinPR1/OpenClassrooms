@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
-import com.openclassrooms.entrevoisins.ui.favorites_list.DetailActivity;
+import com.openclassrooms.entrevoisins.ui.Detail.DetailActivity;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.ItemClickSupport;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -78,7 +78,7 @@ public class NeighbourFragment extends Fragment {
 
 
 
-    // 1 - Configure item click on RecyclerView
+    //  Configure item click on RecyclerView
     private void configureOnClickRecyclerView(){
         ItemClickSupport.addTo(mnRecyclerView, R.layout.fragment_neighbour)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -86,9 +86,10 @@ public class NeighbourFragment extends Fragment {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         Log.d(TAG, "onItemClicked: ");
                         Neighbour neighbour =  mRecyclerAdapter.getNeighbour(position);
-                        Toast.makeText(getContext(), "Chargement..."+ neighbour.getName(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Loading..."+ neighbour.getName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (getActivity(),DetailActivity.class) ;
-                        intent.putExtra(neighbour.getName(),position);
+                        intent.putExtra("KEYNEIGHBOUR",neighbour) ;
+
                         startActivity(intent);
                     }
                 });
