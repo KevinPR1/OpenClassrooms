@@ -40,7 +40,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     }
 
     @Override
-    public void ADDFavNeighbour(Neighbour neighbour) {
+    public void addFavNeighbour(Neighbour neighbour) {
         favoritesNeighbour.add(neighbour);
     }
 }

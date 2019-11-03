@@ -1,8 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.Detail;
 
 
-
-
 import android.content.Intent;
 
 import android.graphics.PorterDuff;
@@ -24,31 +22,27 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
-import com.openclassrooms.entrevoisins.ui.neighbour_list.FavoritesRecyclerAdapter;
+
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 
 
-import java.io.Serializable;
+
 
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailFragment extends Fragment {
+    public class DetailFragment extends Fragment {
     @BindView(R.id.floating_Button) FloatingActionButton FL ;
     @BindView(R.id.ac_return) ImageView back;
     @BindView(R.id.title_TextView) TextView title1 ;
     @BindView(R.id.card_title) TextView title2 ;
     @BindView(R.id.card1_textview3) TextView title3 ;
     @BindView(R.id.ac_avatar) ImageView avatar ;
-
     private static final String TAG = "DetailFragment";
-
     private NeighbourApiService mApiService;
 
 
@@ -60,8 +54,6 @@ public class DetailFragment extends Fragment {
 
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,21 +62,16 @@ public class DetailFragment extends Fragment {
 
     }
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         // Set onClickListener to buttons
         ButterKnife.bind(this,v);
-
         ConfigureScreen();
         ConfigureFloatingActionButton ();
         ConfigureBackButton () ;
         ConfigureFloatingActionButtonState();
-
         return v ;
     }
 
@@ -92,7 +79,6 @@ public class DetailFragment extends Fragment {
     public void ConfigureFloatingActionButton () {
 
         FL.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
 
@@ -111,18 +97,12 @@ public class DetailFragment extends Fragment {
                     FL.setImageResource(R.drawable.ic_star_white_24dp);
                     FL.getDrawable().setColorFilter(getResources().getColor(R.color.IconFavoriteOn), PorterDuff.Mode.SRC_IN);
                     Log.d(TAG, "FloatingButtonClick: ImageRes and content changed");
-                    mApiService.ADDFavNeighbour(neighbour);
+                    mApiService.addFavNeighbour(neighbour);
                     Log.d(TAG, "FloatingButtonClick: Added to favorites");
                 }
-
-
             }
         });
-
     }
-
-
-
 
 
     public void ConfigureBackButton () {
@@ -130,60 +110,43 @@ public class DetailFragment extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Chargement...", Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent (getActivity() , ListNeighbourActivity.class) ;
-                startActivity(intent);
-                Log.d(TAG, "FloatingButtonClick: Back to ListNeighbourActivity");
+                    Toast.makeText(getActivity(), "Chargement...", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent (getActivity() , ListNeighbourActivity.class) ;
+                    startActivity(intent);
+                    Log.d(TAG, "BackButtonClick: Back to ListNeighbourActivity");
             }
         });
-
-
     }
-
-
 
     public void ConfigureScreen() {
 
         Intent intent= getActivity().getIntent();
-
         Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
-
         Glide.with(getContext()).load(neighbour.getAvatarUrl()).into(avatar);
-
-
         title1.setText( ""+ neighbour.getName());
         title2.setText( ""+ neighbour.getName());
         title3.setText("   www.facebook.fr/" + neighbour.getName());
 
-
-
     }
 
+    public void ConfigureFloatingActionButtonState() {
 
+            //  "KEYNEIGHBOUR"
+        Intent intent= getActivity().getIntent();
+        Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
+        mApiService = DI.getNeighbourApiService();
+        if(neighbour != null) {
+            Log.d(TAG, "onCreate: if(neighbouer !null)");
+            if (mApiService.getFavNeighbours().contains(neighbour)){
+                Log.d(TAG, "onCreate: Favorites list contains this neighbour ");
+                FL.setImageResource(R.drawable.ic_star_white_24dp);
+                FL.getDrawable().setColorFilter(getResources().getColor(R.color.IconFavoriteOn), PorterDuff.Mode.SRC_IN);
+                Log.d(TAG, "onCreate: Floating button has changed color");
+            }
 
-
-public void ConfigureFloatingActionButtonState() {
-
-    //  "KEYNEIGHBOUR"
-    Intent intent= getActivity().getIntent();
-    Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
-    mApiService = DI.getNeighbourApiService();
-
-    if(neighbour != null) {
-        Log.d(TAG, "onCreate: Entre dans le if (neighbouer !null)");
-        if (mApiService.getFavNeighbours().contains(neighbour)){
-
-            Log.d(TAG, "onCreate: Le programme a retourné vrai car cet utilisateur est situé dans la liste des favoris");
-
-            FL.setImageResource(R.drawable.ic_star_white_24dp);
-            FL.getDrawable().setColorFilter(getResources().getColor(R.color.IconFavoriteOn), PorterDuff.Mode.SRC_IN);
-            Log.d(TAG, "onCreate: Le programme a défini le bouton favoris en jaune uniquement si l'utilisateur en question est situé dans la liste des favoris ");
         }
 
     }
-
-}
 
 
 

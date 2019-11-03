@@ -25,7 +25,7 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -93,16 +93,13 @@ public class FavoritesFragment extends Fragment {
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        // 1 - Get user from adapter
+                        //  - Get user from adapter
                         Log.d(TAG, "onItemClicked: ");
                         Neighbour neighbour =  mFavoritesRecyclerAdapter.getNeighbour(position);
-
                         Log.d(TAG, "onItemClicked: Neighbour is "+ neighbour.getName());
                         Toast.makeText(getContext(), "Loading..." + neighbour.getName(), Toast.LENGTH_SHORT).show();
-
                         Intent intent = new Intent (getActivity(), DetailActivity.class) ;
                         intent.putExtra("KEYNEIGHBOUR",neighbour) ;
-
                         startActivity(intent);
                     }
                 });

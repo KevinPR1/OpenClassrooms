@@ -87,9 +87,8 @@ public class NeighbourFragment extends Fragment {
                         Log.d(TAG, "onItemClicked: ");
                         Neighbour neighbour =  mRecyclerAdapter.getNeighbour(position);
                         Toast.makeText(getContext(), "Loading..."+ neighbour.getName(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent (getActivity(),DetailActivity.class) ;
-                        intent.putExtra("KEYNEIGHBOUR",neighbour) ;
-
+                        Intent intent = new Intent (getActivity(),DetailActivity.class);
+                        intent.putExtra("KEYNEIGHBOUR",neighbour);
                         startActivity(intent);
                     }
                 });
