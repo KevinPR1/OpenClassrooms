@@ -4,10 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.openclassrooms.entrevoisins.model.Neighbour;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
@@ -20,7 +17,7 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
 
     /**
      * getItem is called to instantiate the fragment for the given page.
-     * @param position
+     * @param position of viewpager (pages)
      * @return null
      */
     @Override
@@ -37,13 +34,9 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
 
     }
 
-
-
-
-
     /**
      * get the number of pages
-     * @return
+     * @return 2 pages
      */
     @Override
     public int getCount() {

@@ -58,10 +58,7 @@ import butterknife.ButterKnife;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         // Inflate the layout for this fragment
@@ -74,7 +71,6 @@ import butterknife.ButterKnife;
         ConfigureFloatingActionButtonState();
         return v ;
     }
-
 
     public void ConfigureFloatingActionButton () {
 
@@ -104,7 +100,6 @@ import butterknife.ButterKnife;
         });
     }
 
-
     public void ConfigureBackButton () {
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -119,19 +114,18 @@ import butterknife.ButterKnife;
     }
 
     public void ConfigureScreen() {
-
+        Log.d(TAG, "ConfigureScreen: Off");
         Intent intent= getActivity().getIntent();
         Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
         Glide.with(getContext()).load(neighbour.getAvatarUrl()).into(avatar);
         title1.setText( ""+ neighbour.getName());
         title2.setText( ""+ neighbour.getName());
-        title3.setText("   www.facebook.fr/" + neighbour.getName());
-
+        title3.setText("www.facebook.fr/" + neighbour.getName());
+        Log.d(TAG, "ConfigureScreen: On");
     }
 
     public void ConfigureFloatingActionButtonState() {
-
-            //  "KEYNEIGHBOUR"
+        // key = KEYNEIGHBOUR
         Intent intent= getActivity().getIntent();
         Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
         mApiService = DI.getNeighbourApiService();
@@ -143,11 +137,6 @@ import butterknife.ButterKnife;
                 FL.getDrawable().setColorFilter(getResources().getColor(R.color.IconFavoriteOn), PorterDuff.Mode.SRC_IN);
                 Log.d(TAG, "onCreate: Floating button has changed color");
             }
-
         }
-
     }
-
-
-
 }
