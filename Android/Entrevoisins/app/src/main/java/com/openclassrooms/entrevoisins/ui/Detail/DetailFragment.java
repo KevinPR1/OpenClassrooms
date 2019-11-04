@@ -51,7 +51,6 @@ import butterknife.ButterKnife;
     public DetailFragment newInstance() {
         // Required empty public constructor
         return (new DetailFragment()) ;
-
     }
 
     @Override
@@ -105,6 +104,7 @@ import butterknife.ButterKnife;
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    Log.d(TAG, "ConfigureBackButton : Click on Back button");
                     Toast.makeText(getActivity(), "Chargement...", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent (getActivity() , ListNeighbourActivity.class) ;
                     startActivity(intent);
@@ -128,6 +128,7 @@ import butterknife.ButterKnife;
         // key = KEYNEIGHBOUR
         Intent intent= getActivity().getIntent();
         Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
+        Log.d(TAG, "ConfigureFloatingActionButtonState: getIntent is not Empty");
         mApiService = DI.getNeighbourApiService();
         if(neighbour != null) {
             Log.d(TAG, "onCreate: if(neighbouer !null)");

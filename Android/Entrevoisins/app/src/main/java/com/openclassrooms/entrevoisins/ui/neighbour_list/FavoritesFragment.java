@@ -106,7 +106,6 @@ public class FavoritesFragment extends Fragment {
     }
 
 
-
     @Override
     public void onStart() {
         super.onStart();
