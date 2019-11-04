@@ -117,10 +117,7 @@ public class NeighboursListTest {
         onView(withId(R.id.frame_layout_detail_activity)).check(matches(isDisplayed())) ;
         // Then : ensure that the neighbour name are the same of the selected neighbour
         onView(withId(R.id.title_TextView)).check(matches(withText(mNeighbourList.get(0).getName()))) ;
-
-
     }
-
 
     /**
      * Show favorites neighbours (only favorites neighbours) in favorites list
@@ -144,7 +141,6 @@ public class NeighboursListTest {
         onView(withId(R.id.frame_layout_detail_activity)).check(matches(isDisplayed())) ;
         // Then : ensure that the neighbour name are the same of the selected neighbour
         onView(withId(R.id.title_TextView)).check(matches(withText(this.mNeighbourList.get(0).getName())));
-
     }
 
 

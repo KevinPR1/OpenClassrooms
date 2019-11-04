@@ -30,10 +30,10 @@ public abstract class DummyNeighbourGenerator {
 
 
 
-    public static List<Neighbour> DUMMY_FAV_NEIGHBOURS = Arrays.asList(
+    public static List<Neighbour> DUMMY_FAVORITES_NEIGHBOURS = Arrays.asList(
 
     );
 
-     static List<Neighbour> generateFavNeighbours() { return new ArrayList<>(DUMMY_FAV_NEIGHBOURS); }
+     static List<Neighbour> generateFavoritesNeighbours() { return new ArrayList<>(DUMMY_FAVORITES_NEIGHBOURS); }
 
 }

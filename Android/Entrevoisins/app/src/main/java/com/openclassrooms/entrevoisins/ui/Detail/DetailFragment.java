@@ -80,19 +80,19 @@ import butterknife.ButterKnife;
                 Intent intent = getActivity().getIntent();
                 Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
 
-                if (mApiService.getFavNeighbours().contains(neighbour)) {
+                if (mApiService.getFavoritesNeighbours().contains(neighbour)) {
                     Toast.makeText(getActivity(), "Removed to favorites : " + neighbour.getName(), Toast.LENGTH_SHORT).show();
                     FL.setImageResource(R.drawable.ic_star_border_white_24dp);
                     FL.getDrawable().setColorFilter(getResources().getColor(R.color.IconFavoriteOff), PorterDuff.Mode.SRC_IN);
                     Log.d(TAG, "FloatingButtonClick: Default Settings");
-                    mApiService.deleteFavNeighbour(neighbour);
+                    mApiService.deleteFavoriteNeighbour(neighbour);
                     Log.d(TAG, "FloatingButtonClick: Removed to favorites");
                 }else {
                     Toast.makeText(getActivity(), "Added to favorites : " + neighbour.getName(), Toast.LENGTH_SHORT).show();
                     FL.setImageResource(R.drawable.ic_star_white_24dp);
                     FL.getDrawable().setColorFilter(getResources().getColor(R.color.IconFavoriteOn), PorterDuff.Mode.SRC_IN);
                     Log.d(TAG, "FloatingButtonClick: ImageRes and content changed");
-                    mApiService.addFavNeighbour(neighbour);
+                    mApiService.addFavoriteNeighbour(neighbour);
                     Log.d(TAG, "FloatingButtonClick: Added to favorites");
                 }
             }
@@ -132,7 +132,7 @@ import butterknife.ButterKnife;
         mApiService = DI.getNeighbourApiService();
         if(neighbour != null) {
             Log.d(TAG, "onCreate: if(neighbouer !null)");
-            if (mApiService.getFavNeighbours().contains(neighbour)){
+            if (mApiService.getFavoritesNeighbours().contains(neighbour)){
                 Log.d(TAG, "onCreate: Favorites list contains this neighbour ");
                 FL.setImageResource(R.drawable.ic_star_white_24dp);
                 FL.getDrawable().setColorFilter(getResources().getColor(R.color.IconFavoriteOn), PorterDuff.Mode.SRC_IN);
