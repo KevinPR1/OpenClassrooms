@@ -27,21 +27,43 @@ public class Neighbour implements Parcelable {
     private String avatarUrl;
 
     /**
+     * Place
+     */
+    private String place;
+
+    /**
+     * Number
+     */
+    private String cellphone;
+
+    /**
+     * facebook
+     */
+    private String facebook;
+
+    /**
+     * F about me
+     */
+    private String about;
+
+
+
+    /**
      * Constructor
      *
      * @param id
      * @param name
      * @param avatarUrl
      */
-    public Neighbour(Integer id, String name, String avatarUrl) {
+    public Neighbour(Integer id, String name, String avatarUrl,String cellphone, String place, String facebook , String about) {
         this.id = id;
         this.name = name;
         this.avatarUrl = avatarUrl;
+        this.cellphone = cellphone;
+        this.place = place ;
+        this.facebook = facebook;
+        this.about = about;
     }
-
-
-
-
 
 
     public Integer getId() {
@@ -63,6 +85,19 @@ public class Neighbour implements Parcelable {
     public String getAvatarUrl() {
         return avatarUrl;
     }
+
+    public String getPlace() { return place; }
+
+    public String getCellphone() { return cellphone;}
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
@@ -91,6 +126,10 @@ public class Neighbour implements Parcelable {
         parcel.writeInt(this.id);
         parcel.writeString(this.name);
         parcel.writeString(this.avatarUrl);
+        parcel.writeString(this.cellphone);
+        parcel.writeString(this.place);
+        parcel.writeString(this.facebook);
+        parcel.writeString(this.about);
 
     }
 
@@ -111,9 +150,10 @@ public class Neighbour implements Parcelable {
         id = in.readInt();
         name = in.readString();
         avatarUrl = in.readString();
+        cellphone = in.readString();
+        place = in.readString();
+        facebook = in.readString();
+        about = in.readString();
     }
-
-
-
 
 }

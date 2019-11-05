@@ -41,7 +41,6 @@ public class NeighbourServiceTest {
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
 
-
     @Test
     public void getFavoriteNeighboursWithSuccess() {
         List<Neighbour> favoriteneighbours = service.getFavoritesNeighbours();
@@ -63,7 +62,4 @@ public class NeighbourServiceTest {
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
-
-
-
 }

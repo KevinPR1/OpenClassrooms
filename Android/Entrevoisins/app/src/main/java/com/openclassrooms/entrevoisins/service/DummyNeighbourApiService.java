@@ -50,4 +50,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     public void addFavoriteNeighbour(Neighbour neighbour) {
         favoritesNeighbour.add(neighbour);
     }
+
+
+
 }

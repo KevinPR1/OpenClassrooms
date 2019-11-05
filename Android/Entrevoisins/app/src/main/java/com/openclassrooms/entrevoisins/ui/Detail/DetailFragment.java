@@ -42,10 +42,17 @@ import butterknife.ButterKnife;
     @BindView(R.id.card_title) TextView title2 ;
     @BindView(R.id.card1_textview3) TextView title3 ;
     @BindView(R.id.ac_avatar) ImageView avatar ;
+    @BindView(R.id.card1_textview2) TextView phone ;
+    @BindView(R.id.description_textview) TextView aboutme ;
+    @BindView(R.id.card1_textview1) TextView lieu;
     private static final String TAG = "DetailFragment";
     private NeighbourApiService mApiService;
-
-
+    Intent mIntent ;
+    String Name;
+    String Place;
+    String cellphone;
+    String Facebook;
+    String AboutNeighbour;
 
 
     public DetailFragment newInstance() {
@@ -62,7 +69,13 @@ import butterknife.ButterKnife;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
-        // Set onClickListener to buttons
+        mIntent = getActivity().getIntent();
+        Neighbour neighbour = mIntent.getParcelableExtra("KEYNEIGHBOUR");
+        Name = neighbour.getName();
+        Place = neighbour.getPlace();
+        cellphone = neighbour.getCellphone();
+        Facebook = neighbour.getFacebook();
+        AboutNeighbour= neighbour.getAbout();
         ButterKnife.bind(this,v);
         ConfigureScreen();
         ConfigureFloatingActionButton ();
@@ -77,9 +90,7 @@ import butterknife.ButterKnife;
             @Override
             public void onClick(View v) {
 
-                Intent intent = getActivity().getIntent();
-                Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
-
+                Neighbour neighbour = mIntent.getParcelableExtra("KEYNEIGHBOUR");
                 if (mApiService.getFavoritesNeighbours().contains(neighbour)) {
                     Toast.makeText(getActivity(), "Removed to favorites : " + neighbour.getName(), Toast.LENGTH_SHORT).show();
                     FL.setImageResource(R.drawable.ic_star_border_white_24dp);
@@ -115,19 +126,20 @@ import butterknife.ButterKnife;
 
     public void ConfigureScreen() {
         Log.d(TAG, "ConfigureScreen: Off");
-        Intent intent= getActivity().getIntent();
-        Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
+        Neighbour neighbour = mIntent.getParcelableExtra("KEYNEIGHBOUR");
         Glide.with(getContext()).load(neighbour.getAvatarUrl()).into(avatar);
-        title1.setText( ""+ neighbour.getName());
-        title2.setText( ""+ neighbour.getName());
-        title3.setText("www.facebook.fr/" + neighbour.getName());
+        title1.setText(Name);
+        title2.setText(Name);
+        title3.setText("www.facebook.fr/" + Facebook);
+        phone.setText(cellphone); ;
+        aboutme.setText(AboutNeighbour);
+        lieu.setText(Place);
         Log.d(TAG, "ConfigureScreen: On");
     }
 
     public void ConfigureFloatingActionButtonState() {
         // key = KEYNEIGHBOUR
-        Intent intent= getActivity().getIntent();
-        Neighbour neighbour = intent.getParcelableExtra("KEYNEIGHBOUR");
+        Neighbour neighbour = mIntent.getParcelableExtra("KEYNEIGHBOUR");
         Log.d(TAG, "ConfigureFloatingActionButtonState: getIntent is not Empty");
         mApiService = DI.getNeighbourApiService();
         if(neighbour != null) {

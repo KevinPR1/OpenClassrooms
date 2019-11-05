@@ -79,7 +79,7 @@ public class FavoritesFragment extends Fragment {
      */
     private void initList() {
 
-        favoritesNeighbour = mApiService.getFavNeighbours();
+        favoritesNeighbour = mApiService.getFavoritesNeighbours();
         mFavoritesRecyclerAdapter = new FavoritesRecyclerAdapter(favoritesNeighbour);
        mRecyclerView.setAdapter(mFavoritesRecyclerAdapter);
     }
@@ -105,7 +105,6 @@ public class FavoritesFragment extends Fragment {
                 });
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -124,7 +123,7 @@ public class FavoritesFragment extends Fragment {
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        mApiService.deleteFavNeighbour(event.neighbour);
+        mApiService.deleteFavoriteNeighbour(event.neighbour);
         initList();
     }
 
