@@ -89,6 +89,7 @@ public class NeighbourFragment extends Fragment {
                         Toast.makeText(getContext(), "Loading..."+ neighbour.getName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent (getActivity(),DetailActivity.class);
                         intent.putExtra("KEYNEIGHBOUR",neighbour);
+                        Log.d(TAG, "onItemClicked: start");
                         startActivity(intent);
                     }
                 });
