@@ -53,7 +53,7 @@ public class NeighboursListTest {
     private ListNeighbourActivity mActivity;
 
     private List<Neighbour> mNeighbourList = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
-    private List<Neighbour> mFavoritesNeighbourList = DummyNeighbourGenerator.DUMMY_FAVORITES_NEIGHBOURS;
+
 
 
     @Rule
@@ -129,19 +129,18 @@ public class NeighboursListTest {
         // Given : Favorites list is not null (just 1 item)
         onView(withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
-        onView(withId(R.id.frame_layout_detail_activity)).check(matches(isDisplayed())) ;
+        onView(withId(R.id.frame_layout_detail_activity)).check(matches(isDisplayed()));
         onView(withId(R.id.floating_Button))
-                .perform(click()) ;
+                .perform(click());
         onView(withId(R.id.ac_return))
-                .perform(click()) ;
+                .perform(click());
         onView(withId(R.id.main_content)).check(matches(isDisplayed())) ;
         // scroll to favorites tab with Click event (like swipe or scroll move)
         onView(withText("FAVORITES")).perform(scrollTo(),click());
         // Show favorites neighbours (only favorites neighbours)
         onView(withId(R.id.Favorites_RecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
-        onView(withId(R.id.frame_layout_detail_activity)).check(matches(isDisplayed())) ;
+        onView(withId(R.id.frame_layout_detail_activity)).check(matches(isDisplayed()));
         // Then : ensure that the neighbour name are the same of the selected neighbour
-        onView(withId(R.id.title_TextView)).check(matches(withText(this.mFavoritesNeighbourList.get(0).getName())));
         onView(withId(R.id.title_TextView)).check(matches(withText(this.mNeighbourList.get(0).getName())));
     }
 }
