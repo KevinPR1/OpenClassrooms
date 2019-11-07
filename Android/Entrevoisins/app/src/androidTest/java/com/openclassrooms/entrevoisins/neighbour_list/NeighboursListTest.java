@@ -53,6 +53,7 @@ public class NeighboursListTest {
     private ListNeighbourActivity mActivity;
 
     private List<Neighbour> mNeighbourList = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
+    private List<Neighbour> mFavoritesNeighbourList = DummyNeighbourGenerator.DUMMY_FAVORITES_NEIGHBOURS;
 
 
     @Rule
@@ -140,11 +141,7 @@ public class NeighboursListTest {
         onView(withId(R.id.Favorites_RecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
         onView(withId(R.id.frame_layout_detail_activity)).check(matches(isDisplayed())) ;
         // Then : ensure that the neighbour name are the same of the selected neighbour
+        onView(withId(R.id.title_TextView)).check(matches(withText(this.mFavoritesNeighbourList.get(0).getName())));
         onView(withId(R.id.title_TextView)).check(matches(withText(this.mNeighbourList.get(0).getName())));
     }
-
-
-
-
-
 }
